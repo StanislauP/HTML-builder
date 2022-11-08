@@ -65,7 +65,7 @@ fs.readdir('06-build-page/components', {withFileTypes: true}, (err, data) => {
                     break       
                 }
         }
-    fs.writeFile('06-build-page/project-dist/index.html', arr.join('\r\n'), (err) => {
+    fs.writeFile('06-build-page/project-dist/index.html', arr.join('\n'), (err) => {
         if (err) throw err;})
     } 
     for(i in arr){
