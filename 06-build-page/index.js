@@ -14,18 +14,14 @@ try{fs.readdir(`06-build-page/project-dist/assets`,  (err, t) =>{
                   });
         
         })}})
-        //fs.rmdir(`06-build-page/project-dist/assets/${fold}`, { recursive: true, force: true },  (err) => {
-        //    if (err) throw err;})
     })})}finally{
 
 fs.readdir('06-build-page/assets', (err, text) => {
     text.forEach( folder =>{
         fs.mkdir(`06-build-page/project-dist/assets/${folder}`,{ recursive: true } , (err) => {
             if (err) throw err;})
-        console.log(folder)
         fs.readdir(`06-build-page/assets/${folder}`, (err, text) => {
             for(file in text){
-                console.log(text[file])
                 fs.copyFile(`06-build-page/assets/${folder}/${text[file]}`, `06-build-page/project-dist/assets/${folder}/${text[file]}`, (err) => {
                     if (err) throw err;})}}, (err) =>{if (err) throw err})
 }, (err) => {
@@ -39,7 +35,6 @@ fs.readdir('06-build-page/styles', {withFileTypes: true}, (err, text) => {
         if (file.name.split('.')[1]=='css'){
             const stream = fs.createReadStream(`06-build-page/styles/${file.name}`, 'utf-8');
             stream.on('data', chunk =>{ 
-                console.log('_____________________',chunk)
                 a+='\r\n'+ '\r\n'
                 a += chunk 
                 fs.writeFile('06-build-page/project-dist/style.css','\n'+'\n'+ a, (err)=>{
@@ -50,26 +45,12 @@ fs.readdir('06-build-page/styles', {withFileTypes: true}, (err, text) => {
         })
 
 // HTML builder
-//fs.readdir('06-build-page/styles', {withFileTypes: true}, (err, text) => {
-//    text.forEach( file=>{
-//        if (file.name.split('.')[1]=='css'){
-//            const stream = fs.createReadStream(`06-build-page/styles/${file.name}`, 'utf-8');
-//            stream.on('data', chunk =>{ a += chunk 
-//                fs.writeFile('06-build-page/project-dist/style.css', a, (err)=>{
-//                     if (err){console.log('error')}})
-//                });
-//        }
-//    })
-//        })
 
 
 fs.readdir('06-build-page/components', {withFileTypes: true}, (err, data) => {
     var db = []
     data.forEach( c=>{
-        
-        db.push(`{{${c.name.split('.')[0]}}}`)//=fs.readFile(`06-build-page/components/${c.name}`, function database (err, text) {
-            //return text.toString()
-            //db[`{{${c.name.split('.')[0]}}}`]=component
+        db.push(`{{${c.name.split('.')[0]}}}`)
             }) 
     fs.readFile('06-build-page/template.html', (err, template)=>{
 
