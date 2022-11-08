@@ -55,7 +55,7 @@ fs.readdir('06-build-page/components', {withFileTypes: true}, (err, data) => {
     fs.readFile('06-build-page/template.html', (err, template)=>{
 
         var str = template.toString()
-        var arr = str.split("\r\n")
+        var arr = str.split("\n")
         
     function replace(data, arr, db){
         for(y in arr){
